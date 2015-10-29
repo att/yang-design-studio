@@ -1,0 +1,89 @@
+//<CODE BEGINS> file "module-test.yang"
+module module-test {
+  namespace "http://com/att/test/module-test";
+  prefix module-test;
+
+  organization
+    "AT&T Labs, Inc."; 
+
+  contact
+    "Kevin D'Souza"; 
+
+  description
+    "YANG Module used to validate ATT YANG Design Studio functionality
+	
+	Distributed under Eclipse Public License v 1.0
+	(http://opensource.org/licenses/eclipse-1.0.txt)
+	"; 
+
+  revision 2014-11-05 {
+    description   "Initial Revision";
+  }
+
+  grouping grouping-test1 {
+  	container group-test1-container {
+  		leaf group-test1-leaf {
+  			type enumeration {
+  				enum 1;
+  				enum 2;
+  			}
+  		}
+  		list group-test1-list {
+  			key list-test-key1;
+  			leaf list-test-key1 { type uint8; }
+  		}
+  	}
+  }
+
+  grouping grouping-test2 {
+  
+  	choice group-test2-choice {
+
+  	  container group-test2-choice1 {
+ 
+        leaf group-test2-leaf1 {
+  	      type string;
+  	      default "test2";
+  	      mandatory false;
+  	    }
+  	  }
+  	  
+   	  container group-test2-choice2 {
+ 
+        leaf group-test2-leaf2 {
+  	      type string;
+  	    }
+  	  } 	  
+  	}
+  }
+
+  container  use-container {
+
+    container use-test1 {
+      
+      leaf use-test1-leaf {
+        description "use-test1 container";
+        type string;
+      }
+      
+      uses grouping-test1;
+      
+      container hierarchy-test1 {
+      	leaf second-level-hierarchy {
+      		type string;
+      	}
+      }
+    }
+    
+    leaf use-container-leaf {
+      type int32;
+      mandatory true;
+    }
+    
+    uses grouping-test2;
+    
+    leaf end-test {
+      type string;
+    }
+  }
+}//<CODE ENDS>

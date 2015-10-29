@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="yang" nsURI="http://www.xtext.org/editor/yang/Yang" nsPrefix="yang">
+  <eClassifiers xsi:type="ecore:EClass" name="YangFile">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Module" eSuperTypes="#//YangFile">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//ModuleStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ModuleStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="SubModule" eSuperTypes="#//YangFile">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statements" upperBound="-1"
+        eType="#//SubmoduleStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SubmoduleStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DatadefStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement #//InputSubstatement #//OutputSubstatement #//NotificationSubstatement #//ContainerSubstatement #//ListSubstatement #//GroupingSubstatement #//CaseSubstatement #//AugmentSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="YangVersionStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="version" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="yangversionunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OrganizationStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="organization" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="organizationunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContactStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="contact" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="contactunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DescriptionStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement #//MultipleSubstatement #//RpcSubstatement #//NotificationSubstatement #//ContainerSubstatement #//ListSubstatement #//GroupingSubstatement #//LeafSubstatement #//LeafListSubstatement #//ChoiceSubstatement #//CaseSubstatement #//AnyxmlSubstatement #//UsesSubstatement #//AugmentSubstatement #//RefineSubstatement #//DeviationSubstatement #//ExtensionSubstatement #//IdentitySubstatement #//FeatureSubstatement #//TypedefSubstatement #//BitSubstatement #//EnumSubstatement #//WhenSubstatements #//RevisionSubstatements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="description" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="descriptionunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ReferenceStatement" eSuperTypes="#//MultipleSubstatement #//RpcSubstatement #//NotificationSubstatement #//ContainerSubstatement #//ListSubstatement #//GroupingSubstatement #//LeafSubstatement #//LeafListSubstatement #//ChoiceSubstatement #//CaseSubstatement #//AnyxmlSubstatement #//UsesSubstatement #//AugmentSubstatement #//RefineSubstatement #//DeviationSubstatement #//ExtensionSubstatement #//IdentitySubstatement #//FeatureSubstatement #//TypedefSubstatement #//BitSubstatement #//EnumSubstatement #//WhenSubstatements #//RevisionSubstatements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="reference" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="referenceunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamespaceStatement" eSuperTypes="#//ModuleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="uri" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="namespaceunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PrefixStatement" eSuperTypes="#//ModuleStatement #//BelongsToSubstatement #//ImportSubstatements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="prefixunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RequireInstanceStatement" eSuperTypes="#//TypeSubStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="require" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="requireunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PathStatement" eSuperTypes="#//TypeSubStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="path" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pathunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PositionStatement" eSuperTypes="#//BitSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intarg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="positionunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ValueStatement" eSuperTypes="#//EnumSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="intarg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="valueunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ErrorAppTagStatement" eSuperTypes="#//MultipleSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="erroraunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ErrorMessageStatement" eSuperTypes="#//MultipleSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="errormunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnitsStatement" eSuperTypes="#//LeafSubstatement #//LeafListSubstatement #//DeviateSubstatement #//TypedefSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unitsunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DefaultStatement" eSuperTypes="#//LeafSubstatement #//LeafListSubstatement #//ChoiceSubstatement #//RefineSubstatement #//DeviateSubstatement #//TypedefSubstatement #//TypeSubStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="defaultunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StatusStatement" eSuperTypes="#//RpcSubstatement #//NotificationSubstatement #//ContainerSubstatement #//ListSubstatement #//GroupingSubstatement #//LeafSubstatement #//LeafListSubstatement #//ChoiceSubstatement #//CaseSubstatement #//AnyxmlSubstatement #//UsesSubstatement #//AugmentSubstatement #//ExtensionSubstatement #//IdentitySubstatement #//FeatureSubstatement #//TypedefSubstatement #//BitSubstatement #//EnumSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="status" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="statusunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RevisionDateStatement" eSuperTypes="#//ImportSubstatements #//IncludeSubstatements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="revisiondateunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UniqueStatement" eSuperTypes="#//ListSubstatement #//DeviateSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="uniqueunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="KeyStatement" eSuperTypes="#//ListSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="keyunknownstatements" upperBound="-1"
+        eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OrderedbyStatement" eSuperTypes="#//ListSubstatement #//LeafListSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="orderedbyunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PresenceStatement" eSuperTypes="#//ContainerSubstatement #//RefineSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="presenceunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MandatoryStatement" eSuperTypes="#//LeafSubstatement #//ChoiceSubstatement #//AnyxmlSubstatement #//RefineSubstatement #//DeviateSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolarg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mandatoryunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ConfigStatement" eSuperTypes="#//ContainerSubstatement #//ListSubstatement #//LeafSubstatement #//LeafListSubstatement #//ChoiceSubstatement #//AnyxmlSubstatement #//RefineSubstatement #//DeviateSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolarg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="configunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FractionDigitsStatement" eSuperTypes="#//TypeSubStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="fractiondigitsunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IfFeatureStatement" eSuperTypes="#//RpcSubstatement #//NotificationSubstatement #//ContainerSubstatement #//ListSubstatement #//LeafSubstatement #//LeafListSubstatement #//ChoiceSubstatement #//CaseSubstatement #//AnyxmlSubstatement #//UsesSubstatement #//AugmentSubstatement #//FeatureSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ident" eType="#//FeatureStatement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="iffeatureunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BaseStatement" eSuperTypes="#//IdentitySubstatement #//TypeSubStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="base" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="baseunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="YinElementStatement" eSuperTypes="#//ArgumentSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="boolarg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="yinelementunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MinElementsStatement" eSuperTypes="#//ListSubstatement #//LeafListSubstatement #//RefineSubstatement #//DeviateSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="minelementsunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MaxElementsStatement" eSuperTypes="#//ListSubstatement #//LeafListSubstatement #//RefineSubstatement #//DeviateSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="maxelementsunknownstatements"
+        upperBound="-1" eType="#//UnknownStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnknownStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement #//MultipleSubstatement #//RpcSubstatement #//InputSubstatement #//OutputSubstatement #//NotificationSubstatement #//ContainerSubstatement #//ListSubstatement #//GroupingSubstatement #//LeafSubstatement #//LeafListSubstatement #//ChoiceSubstatement #//CaseSubstatement #//AnyxmlSubstatement #//UsesSubstatement #//AugmentSubstatement #//RefineSubstatement #//DeviationSubstatement #//DeviateSubstatement #//ExtensionSubstatement #//ArgumentSubstatement #//IdentitySubstatement #//FeatureSubstatement #//BelongsToSubstatement #//TypedefSubstatement #//TypeSubStatement #//BitSubstatement #//EnumSubstatement #//ImportSubstatements #//IncludeSubstatements #//WhenSubstatements #//RevisionSubstatements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="namestat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="argument" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unknownsubstatements" upperBound="-1"
+        eType="#//UnknownSubstatements" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UnknownSubstatements">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pref" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="namestat" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="argument" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="unknownsubstatements" upperBound="-1"
+        eType="#//UnknownSubstatements" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RangeStatement" eSuperTypes="#//TypeSubStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="range" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rangesubstatements" upperBound="-1"
+        eType="#//MultipleSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="PatternStatement" eSuperTypes="#//TypeSubStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="patternsubstatements" upperBound="-1"
+        eType="#//MultipleSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LengthStatement" eSuperTypes="#//TypeSubStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="length" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="lengthsubstatements" upperBound="-1"
+        eType="#//MultipleSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MustStatement" eSuperTypes="#//ContainerSubstatement #//ListSubstatement #//LeafSubstatement #//LeafListSubstatement #//AnyxmlSubstatement #//RefineSubstatement #//DeviateSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="mustsubstatements" upperBound="-1"
+        eType="#//MultipleSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="MultipleSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RpcStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="rpcsubstatements" upperBound="-1"
+        eType="#//RpcSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RpcSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="InputStatement" eSuperTypes="#//RpcSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="inputsubstatements" upperBound="-1"
+        eType="#//InputSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="InputSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputStatement" eSuperTypes="#//RpcSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="outputsubstatements" upperBound="-1"
+        eType="#//OutputSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="OutputSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="NotificationStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="notificationsubstatements"
+        upperBound="-1" eType="#//NotificationSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NotificationSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainerStatement" eSuperTypes="#//DatadefStatement #//ChoiceSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="containersubstatements"
+        upperBound="-1" eType="#//ContainerSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ContainerSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ListStatement" eSuperTypes="#//DatadefStatement #//ChoiceSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="listsubstatements" upperBound="-1"
+        eType="#//ListSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ListSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupingStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement #//RpcSubstatement #//InputSubstatement #//OutputSubstatement #//NotificationSubstatement #//ContainerSubstatement #//ListSubstatement #//GroupingSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="groupingsubstatements"
+        upperBound="-1" eType="#//GroupingSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="GroupingSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LeafStatement" eSuperTypes="#//DatadefStatement #//ChoiceSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leafsubstatements" upperBound="-1"
+        eType="#//LeafSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LeafSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="LeafListStatement" eSuperTypes="#//DatadefStatement #//ChoiceSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="leaflistsubstatements"
+        upperBound="-1" eType="#//LeafListSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="LeafListSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoiceStatement" eSuperTypes="#//DatadefStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="choicesubstatements" upperBound="-1"
+        eType="#//ChoiceSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ChoiceSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="CaseStatement" eSuperTypes="#//ChoiceSubstatement #//AugmentSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="casesubstatements" upperBound="-1"
+        eType="#//CaseSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="CaseSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyxmlStatement" eSuperTypes="#//DatadefStatement #//ChoiceSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="anyxmlsubstatements" upperBound="-1"
+        eType="#//AnyxmlSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnyxmlSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="UsesStatement" eSuperTypes="#//DatadefStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="arg" eType="#//GroupingStatement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="usessubstatements" upperBound="-1"
+        eType="#//UsesSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="UsesSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="AugmentUsesStatement" eSuperTypes="#//UsesSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="augmentsubstatements" upperBound="-1"
+        eType="#//AugmentSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AugmentStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="augmentsubstatements" upperBound="-1"
+        eType="#//AugmentSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AugmentSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RefineStatement" eSuperTypes="#//UsesSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="refinesubstatements" upperBound="-1"
+        eType="#//RefineSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RefineSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeviationStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deviationsubstatements"
+        upperBound="-1" eType="#//DeviationSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeviationSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="DeviateStatement" eSuperTypes="#//DeviationSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="deviatesubstatements" upperBound="-1"
+        eType="#//DeviateSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DeviateSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtensionStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extensionsubstatements"
+        upperBound="-1" eType="#//ExtensionSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExtensionSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ArgumentStatement" eSuperTypes="#//ExtensionSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="argumentsubstatements"
+        upperBound="-1" eType="#//ArgumentSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ArgumentSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IdentityStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="identitysubstatements"
+        upperBound="-1" eType="#//IdentitySubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IdentitySubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="featuresubstatements" upperBound="-1"
+        eType="#//FeatureSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="FeatureSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BelongsToStatement" eSuperTypes="#//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="belongstosubstatement"
+        upperBound="-1" eType="#//BelongsToSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BelongsToSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedefStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement #//RpcSubstatement #//InputSubstatement #//OutputSubstatement #//NotificationSubstatement #//ContainerSubstatement #//ListSubstatement #//GroupingSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typedefsubstatemnet" upperBound="-1"
+        eType="#//TypedefSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypedefSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeStatement" eSuperTypes="#//LeafSubstatement #//LeafListSubstatement #//TypedefSubstatement #//TypeSubStatement #//ImportSubstatements #//IncludeSubstatements">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//BuiltInType"
+        containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pre" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importtype" eType="#//TypedefStatement"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="typesubstatements" upperBound="-1"
+        eType="#//TypeSubStatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="TypeSubStatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BitStatement" eSuperTypes="#//TypeSubStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="bitsubstatements" upperBound="-1"
+        eType="#//BitSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="BitSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumStatement" eSuperTypes="#//TypeSubStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumsubstatements" upperBound="-1"
+        eType="#//EnumSubstatement" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="EnumSubstatement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="importsubstatements" upperBound="-1"
+        eType="#//ImportSubstatements" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ImportSubstatements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="IncludeStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="importURI" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="includesubstatements" upperBound="-1"
+        eType="#//IncludeSubstatements" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="IncludeSubstatements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="WhenStatement" eSuperTypes="#//ContainerSubstatement #//ListSubstatement #//LeafSubstatement #//LeafListSubstatement #//ChoiceSubstatement #//CaseSubstatement #//AnyxmlSubstatement #//UsesSubstatement #//AugmentSubstatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="arg" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="whensubstatements" upperBound="-1"
+        eType="#//WhenSubstatements" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="WhenSubstatements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="RevisionStatement" eSuperTypes="#//ModuleStatement #//SubmoduleStatement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="revisionsubstatements"
+        upperBound="-1" eType="#//RevisionSubstatements" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="RevisionSubstatements"/>
+  <eClassifiers xsi:type="ecore:EClass" name="BuiltInType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="btype" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+</ecore:EPackage>

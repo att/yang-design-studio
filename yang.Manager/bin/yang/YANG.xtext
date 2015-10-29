@@ -1,0 +1,870 @@
+grammar yang.manager.Yang hidden(WS, ML_COMMENT, SL_COMMENT)
+//with org.eclipse.xtext.common.Terminals
+
+generate yang "http://www.xtext.org/editor/yang/Yang"
+
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+YangFile:
+	Module | SubModule;
+
+Module:
+	'module' name=STRINGARG
+	'{'
+		(statements+=ModuleStatement)*
+	'}';
+	
+ModuleStatement:
+	(NamespaceStatement
+	|PrefixStatement
+	|YangVersionStatement
+	|OrganizationStatement
+	|ContactStatement
+	|DescriptionStatement
+	|ImportStatement
+	|IncludeStatement
+	|RevisionStatement
+	|ExtensionStatement
+	|FeatureStatement
+	|IdentityStatement
+	|TypedefStatement
+	|GroupingStatement
+	|DatadefStatement
+	|AugmentStatement
+	|RpcStatement
+	|NotificationStatement
+	|DeviationStatement
+	|UnknownStatement)
+	;
+
+SubModule:
+	'submodule' name=STRINGARG
+	'{'
+		(statements+=SubmoduleStatement)*
+	'}';
+
+SubmoduleStatement:
+	(YangVersionStatement
+	|OrganizationStatement
+	|ContactStatement
+	|DescriptionStatement
+	|ImportStatement
+	|IncludeStatement
+	|RevisionStatement
+	|BelongsToStatement
+	|ExtensionStatement
+	|FeatureStatement
+	|IdentityStatement
+	|TypedefStatement
+	|GroupingStatement
+	|DatadefStatement
+	|AugmentStatement
+	|RpcStatement
+	|NotificationStatement
+	|DeviationStatement
+	|UnknownStatement)
+	;
+
+DatadefStatement:
+	(ContainerStatement
+	|LeafStatement
+	|LeafListStatement
+	|ListStatement
+	|ChoiceStatement
+	|AnyxmlStatement
+	|UsesStatement)
+	;	
+
+
+//WITHOUT SUBSTATEMENS
+//yang-version-arg    = "1"		
+YangVersionStatement:	
+	'yang-version' version=STRINGARG
+	(';' 
+	|'{' (yangversionunknownstatements+=UnknownStatement)* '}');
+	
+//string		
+OrganizationStatement:
+	'organization' organization=STRINGARG
+	(';' 
+	|'{' (organizationunknownstatements+=UnknownStatement)* '}');
+
+//string
+ContactStatement:
+	'contact' contact=STRINGARG
+	(';' 
+	|'{' (contactunknownstatements+=UnknownStatement)* '}');
+
+//string	
+DescriptionStatement:
+	'description' description=STRINGARG
+	(';' 
+	|'{' (descriptionunknownstatements+=UnknownStatement)* '}');
+
+//string
+ReferenceStatement:
+	'reference' reference=STRINGARG
+	(';' 
+	|'{' (referenceunknownstatements+=UnknownStatement)* '}');
+	
+//uri-str	
+NamespaceStatement:		 
+	'namespace' uri=(STRINGARG | STRINGARG4)
+	(';' 
+	|'{' (namespaceunknownstatements+=UnknownStatement)* '}');
+
+//identifier-arg-str
+PrefixStatement:
+	'prefix' name=STRINGARG
+	(';' 
+	|'{' (prefixunknownstatements+=UnknownStatement)* '}');
+	
+//true or false	
+RequireInstanceStatement:
+	'require-instance' require=STRINGARG
+	(';' 
+	|'{' (requireunknownstatements+=UnknownStatement)* '}');
+	
+// MUST be present if the type is "leafref"
+// path-arg=absolute-path / relative-path
+PathStatement:
+	'path' path=STRINGARG		
+	(';' 
+	|'{' (pathunknownstatements+=UnknownStatement)* '}');
+
+//arg MUST BE non-negative-integer-value
+PositionStatement:
+	'position' intarg=STRINGARG 	
+	(';' 
+	|'{' (positionunknownstatements+=UnknownStatement)* '}');
+
+//arg is integer and This integer value MUST be unique within the enumeration type.
+ValueStatement:
+	'value' intarg=STRINGARG	
+	(';' 
+	|'{' (valueunknownstatements+=UnknownStatement)* '}');
+
+//string
+ErrorAppTagStatement:
+	'error-app-tag' arg=STRINGARG
+	(';' 
+	|'{' (erroraunknownstatements+=UnknownStatement)* '}');
+
+//string	
+ErrorMessageStatement:
+	'error-message' arg=STRINGARG
+	(';' 
+	|'{' (errormunknownstatements+=UnknownStatement)* '}');
+
+//string
+UnitsStatement:
+	'units' arg=STRINGARG
+	(';' 
+	|'{' (unitsunknownstatements+=UnknownStatement)* '}');
+
+//Could have crossrefence to a type name
+//string
+DefaultStatement:
+	'default' (arg=STRINGARG)
+	(';' 
+	|'{' (defaultunknownstatements+=UnknownStatement)* '}');
+
+
+//If a definition is "current", it MUST NOT reference a "deprecated" or "obsolete" definition within the same module.
+//If a definition is "deprecated", it MUST NOT reference an "obsolete" definition within the same module.
+StatusStatement:
+	'status' status=STRINGARG
+	(';' 
+	|'{' (statusunknownstatements+=UnknownStatement)* '}');
+
+RevisionDateStatement:
+	'revision-date' date=STRINGARG
+	(';' 
+	|'{' (revisiondateunknownstatements+=UnknownStatement)* '}')
+	;	
+
+// unique-arg = descendant-schema-nodeid *(sep descendant-schema-nodeid)
+UniqueStatement:
+	'unique' arg=STRINGARG
+	(';' 
+	|'{' (uniqueunknownstatements+=UnknownStatement)* '}')
+	;	
+
+
+
+// key-arg = node-identifier *(sep node-identifier)
+KeyStatement:
+	'key' arg=(STRINGARG|STRINGARG2)
+	(';' 
+	|'{' (keyunknownstatements+=UnknownStatement)* '}')
+	;
+	
+OrderedbyStatement:
+	'ordered-by' arg=STRINGARG
+	(';' 
+	|'{' (orderedbyunknownstatements+=UnknownStatement)* '}')
+	;	
+	
+//string	
+PresenceStatement:
+	'presence' arg=STRINGARG
+	(';' 
+	|'{' (presenceunknownstatements+=UnknownStatement)* '}')
+	;
+	
+MandatoryStatement:
+	'mandatory' boolarg=STRINGARG
+	(';' 
+	|'{' (mandatoryunknownstatements+=UnknownStatement)* '}')
+	;	
+	
+ConfigStatement:
+	'config' boolarg=STRINGARG
+	(';' 
+	|'{' (configunknownstatements+=UnknownStatement)* '}')
+	;	
+	
+//MUST be present if the type is "decimal64". It takes as an argument an integer between 1 and 18, inclusively. 
+FractionDigitsStatement:
+	'fraction-digits' arg=STRINGARG
+	(';' 
+	|'{' (fractiondigitsunknownstatements+=UnknownStatement)* '}')
+	;	
+	
+//The argument is the name of a feature, as defined by a "feature" statement
+//identifier-ref-arg-str
+IfFeatureStatement:
+	'if-feature' (pref=STRINGARG ':')? ident=[FeatureStatement]  
+	(';' 
+	|'{' (iffeatureunknownstatements+=UnknownStatement)* '}')
+	;
+	
+// The "base" statement MUST be present if the type is "identityref".
+// The argument is the name of an identity, as defined by an "identity" statement.
+//identifier-ref-arg-str
+BaseStatement:
+	'base' base=(STRINGARG |STRINGARG2) //(pref=STRINGARG':')?//ident=[IdentityStatement]
+	(';' 
+	|'{' (baseunknownstatements+=UnknownStatement)* '}');	
+	
+	
+YinElementStatement:
+	'yin-element' boolarg=STRINGARG
+	(';' 
+	|'{' (yinelementunknownstatements+=UnknownStatement)* '}')
+	;	
+	
+//Takes as an argument a non-negative integer
+MinElementsStatement:
+	'min-elements' arg=STRINGARG
+	(';' 
+	|'{' (minelementsunknownstatements+=UnknownStatement)* '}')
+	;
+	
+//Takes as an argument a positive integer or the string "unbounded"
+MaxElementsStatement:
+	'max-elements' arg=STRINGARG
+	(';' 
+	|'{' (maxelementsunknownstatements+=UnknownStatement)* '}')
+	;
+	
+	
+UnknownStatement:
+	pref=STRINGARG':' namestat=STRINGARG (argument=STRINGARG)?
+	(';' 
+	|'{' (unknownsubstatements+=UnknownSubstatements)* '}');
+
+UnknownSubstatements:
+	(pref=STRINGARG':')? namestat=STRINGARG (argument=STRINGARG)?
+	(';' 
+	|'{' (unknownsubstatements+=UnknownSubstatements)* '}');
+	
+	
+	
+	
+	
+	
+//WITH SUBSTATEMENTS	
+
+//It is used to restrict integer and decimal built-in types, or types derived from those.
+//The range expression syntax is formally defined by the rule "range-arg".
+RangeStatement:
+	'range' range=(STRINGARG | STRINGARG3)
+	(';' 
+	|'{' (rangesubstatements+=MultipleSubstatement)* '}');
+
+//It is used to restrict the built-in type "string", or types derived from "string", to values that match the pattern.
+//string-arg
+PatternStatement:
+	'pattern' name=STRINGARG
+	(';' 
+	|'{' (patternsubstatements+=MultipleSubstatement)* '}');
+
+
+//It is used to restrict the built-in type "string", or types derived from "string".
+//The length expression syntax is formally defined by the rule "length-arg".
+LengthStatement:
+	'length' length=STRINGARG
+	(';' 
+	|'{' (lengthsubstatements+=MultipleSubstatement)* '}');
+
+
+//string
+MustStatement:
+	'must' arg=STRINGARG
+	(';' 
+	|'{' (mustsubstatements+=MultipleSubstatement)* '}')
+	;		
+
+MultipleSubstatement:
+	(DescriptionStatement
+	|ReferenceStatement
+	|ErrorAppTagStatement	
+	|ErrorMessageStatement
+	|UnknownStatement)
+	;
+	
+//identifier-arg-str
+RpcStatement:
+	'rpc' name=STRINGARG
+	'{'(rpcsubstatements+=RpcSubstatement)* '}'
+	;
+	
+RpcSubstatement:
+	(IfFeatureStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|TypedefStatement
+	|GroupingStatement
+	|InputStatement
+	|OutputStatement
+	|UnknownStatement)
+	;
+	
+InputStatement:
+	'input'
+	'{'(inputsubstatements+=InputSubstatement)+ '}'
+	;	
+
+InputSubstatement:
+	(TypedefStatement
+	|GroupingStatement
+	|DatadefStatement
+	|(=>UsesStatement)
+	|UnknownStatement)
+	;
+
+OutputStatement:
+	'output'
+	'{'(outputsubstatements+=OutputSubstatement)+ '}'
+	;	
+OutputSubstatement:
+	(TypedefStatement
+	|GroupingStatement
+	|DatadefStatement
+	|(=>UsesStatement)
+	|UnknownStatement)
+	;
+
+//identifier-arg-str
+NotificationStatement:
+	'notification' name=STRINGARG
+	(';' 
+	|'{'(notificationsubstatements+=NotificationSubstatement)* '}');	
+NotificationSubstatement:
+	(IfFeatureStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|TypedefStatement
+	|GroupingStatement
+	|DatadefStatement
+	|UnknownStatement)
+	;
+
+//identifier-arg-str
+ContainerStatement:
+	'container' name=STRINGARG
+	(';' 
+	|'{'(containersubstatements+=ContainerSubstatement)* '}');
+ContainerSubstatement:
+	(WhenStatement
+	|IfFeatureStatement
+	|MustStatement
+	|PresenceStatement
+	|ConfigStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|TypedefStatement
+	|GroupingStatement
+	|DatadefStatement
+	|UnknownStatement) 
+	;	
+	
+//identifier-arg-str
+ListStatement:
+	'list' name=(STRINGARG | KEY_IDENTIFIER)
+	(';' 
+	|'{'(listsubstatements+=ListSubstatement)* '}');
+ListSubstatement:
+	(WhenStatement
+	|IfFeatureStatement
+	|MustStatement
+	|KeyStatement
+	|UniqueStatement
+	|ConfigStatement
+	|MinElementsStatement
+	|MaxElementsStatement
+	|OrderedbyStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|TypedefStatement
+	|GroupingStatement
+	|DatadefStatement
+	|UnknownStatement)
+	;
+
+//identifier-arg-str
+GroupingStatement:
+	'grouping' name=STRINGARG
+	(';' 
+	|'{'(groupingsubstatements+=GroupingSubstatement)* '}');
+GroupingSubstatement:
+	(StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|TypedefStatement
+	|GroupingStatement
+	|DatadefStatement
+	|UnknownStatement)
+	;
+
+//identifier-arg-str
+LeafStatement:
+	'leaf' name=(STRINGARG | KEY_IDENTIFIER)
+	(';' 
+	|'{'(leafsubstatements+=LeafSubstatement)* '}');
+LeafSubstatement:
+	(WhenStatement
+	|IfFeatureStatement
+	|TypeStatement
+	|UnitsStatement
+	|MustStatement
+	|DefaultStatement
+	|ConfigStatement
+	|MandatoryStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|UnknownStatement)
+	;	
+
+
+// The values in a leaf-list MUST be unique.
+//identifier-arg-str
+LeafListStatement:
+	'leaf-list' arg=STRINGARG
+	(';' 
+	|'{'(leaflistsubstatements+=LeafListSubstatement)* '}');
+LeafListSubstatement:
+	(WhenStatement
+	|IfFeatureStatement
+	|TypeStatement
+	|UnitsStatement
+	|MustStatement
+	|DefaultStatement
+	|ConfigStatement
+	|MinElementsStatement
+	|MaxElementsStatement
+	|OrderedbyStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|UnknownStatement)
+	;	
+
+//identifier-arg-str
+ChoiceStatement:
+	'choice' name=(STRINGARG | KEY_IDENTIFIER)
+	(';' 
+	|'{'(choicesubstatements+=ChoiceSubstatement)* '}');
+ChoiceSubstatement:
+	(WhenStatement
+	|IfFeatureStatement
+	|DefaultStatement
+	|ConfigStatement
+	|MandatoryStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|CaseStatement
+	|ContainerStatement
+	|LeafStatement
+	|LeafListStatement
+	|ListStatement
+	|AnyxmlStatement
+	|UnknownStatement)
+	;
+	
+//The case identifier MUST be unique within a choice.
+//identifier-arg-str
+CaseStatement:
+	'case' name=(STRINGARG | KEY_IDENTIFIER)
+	(';' 
+	|'{'(casesubstatements+=CaseSubstatement)* '}');
+CaseSubstatement:
+	(WhenStatement
+	|IfFeatureStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|DatadefStatement
+	|UnknownStatement) 
+	;
+
+//identifier-arg-str
+AnyxmlStatement:	
+	'anyxml' arg=(STRINGARG	| KEY_IDENTIFIER)
+	(';' 
+	|'{'(anyxmlsubstatements+=AnyxmlSubstatement)* '}');
+AnyxmlSubstatement:
+	(WhenStatement
+	|IfFeatureStatement
+	|MustStatement
+	|ConfigStatement
+	|MandatoryStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|UnknownStatement)
+	;	
+	
+	
+	
+//It takes one argument, which is the name of the grouping.
+//identifier-arg-str
+UsesStatement:	
+	'uses' (pre=STRINGARG':')? arg=[GroupingStatement]
+	(';' 
+	|'{'(usessubstatements+=UsesSubstatement)* '}');
+UsesSubstatement:
+	(WhenStatement
+	|IfFeatureStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|RefineStatement
+	|AugmentUsesStatement
+	|UnknownStatement)
+	;
+
+// uses-augment-arg = descendant-schema-nodeid
+AugmentUsesStatement:
+	'augment' arg=STRINGARG
+	(';' 
+	|'{'(augmentsubstatements+=AugmentSubstatement)* '}');
+
+// augment-arg      = absolute-schema-nodeid
+// The target node MUST be either a container, list, choice, case, input, output, or notification node.
+AugmentStatement:
+	'augment' arg=(STRINGARG |STRINGARG4)
+	(';' 
+	|'{'(augmentsubstatements+=AugmentSubstatement)* '}');
+AugmentSubstatement:
+	(WhenStatement
+	|IfFeatureStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|DatadefStatement
+	|CaseStatement
+	|UnknownStatement)
+	;
+
+
+// refine-arg = descendant-schema-nodeid
+RefineStatement:
+	'refine' arg=STRINGARG
+	(';' 
+	|'{'(refinesubstatements+=RefineSubstatement)* '}');
+RefineSubstatement:
+	(MustStatement
+	|DefaultStatement
+	|PresenceStatement
+	|ConfigStatement
+	|MandatoryStatement
+	|MinElementsStatement
+	|MaxElementsStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|UnknownStatement)
+	;	
+
+
+//The argument is a string that identifies the node in the schema tree where a deviation from the module occurs.
+//deviation-arg = absolute-schema-nodeid
+DeviationStatement:
+	'deviation' arg=STRINGARG
+	(';' 
+	|'{' (deviationsubstatements+=DeviationSubstatement)* '}');
+DeviationSubstatement:
+	(DeviateStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|UnknownStatement)
+	;
+
+DeviateStatement: 
+	'deviate' arg=STRINGARG 
+	(';' 
+	|'{' (deviatesubstatements+=DeviateSubstatement)* '}');
+DeviateSubstatement:
+	(UniqueStatement
+	|MustStatement
+	|UnitsStatement
+	|DefaultStatement
+	|ConfigStatement
+	|MandatoryStatement
+	|MinElementsStatement
+	|MaxElementsStatement
+	|UnknownStatement)
+	;
+
+//identifier-arg-str
+ExtensionStatement:
+	'extension' arg=(STRINGARG | KEY_IDENTIFIER)
+	(';' 
+	|'{' (extensionsubstatements+=ExtensionSubstatement)* '}');
+ExtensionSubstatement:
+	(ArgumentStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|UnknownStatement)
+	;
+
+//identifier-arg-str
+ArgumentStatement:
+	'argument' arg=(STRINGARG|KEY_IDENTIFIER)
+	(';' 
+	|'{' (argumentsubstatements+=ArgumentSubstatement)* '}');	
+ArgumentSubstatement:
+	(YinElementStatement
+	|UnknownStatement)
+	;
+	
+//identifier-arg-str		
+IdentityStatement:
+	'identity' name=STRINGARG
+	(';' 
+	|'{' (identitysubstatements+=IdentitySubstatement)* '}');
+IdentitySubstatement:
+	(BaseStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|UnknownStatement)
+	;
+	
+//identifier-arg-str
+FeatureStatement:
+	'feature' name=STRINGARG
+	(';' 
+	|'{' (featuresubstatements+=FeatureSubstatement)* '}');	
+FeatureSubstatement:
+	(IfFeatureStatement
+	|StatusStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|UnknownStatement)
+	;
+
+//identifier-arg-str
+BelongsToStatement:
+	'belongs-to' name=STRINGARG
+	'{' (belongstosubstatement+=BelongsToSubstatement)* '}';	
+BelongsToSubstatement:
+	(PrefixStatement
+	|UnknownStatement)
+	;
+
+//identifier-ref-arg-str
+TypedefStatement:
+	'typedef' name=(STRINGARG|KEY_IDENTIFIER)
+	'{' (typedefsubstatemnet+=TypedefSubstatement)* '}';	
+TypedefSubstatement:
+	(TypeStatement
+	|DescriptionStatement
+	|ReferenceStatement
+	|DefaultStatement
+	|StatusStatement
+	|UnitsStatement
+	|UnknownStatement)
+	;
+
+//The crossreference must be done in diferent blocks
+//identifier-ref-arg-str 
+//[TypedefStatement]
+TypeStatement:
+	'type' (type=BuiltInType | (pre=STRINGARG':') ? importtype=[TypedefStatement])
+	(';' 
+	|'{' (typesubstatements+=TypeSubStatement)* '}');    
+TypeSubStatement:
+	(BitStatement 
+	|FractionDigitsStatement
+	|DefaultStatement
+	|BaseStatement
+	|EnumStatement
+	|LengthStatement
+	|PathStatement
+	|PatternStatement
+	|RangeStatement
+	|RequireInstanceStatement
+	|TypeStatement
+	|UnknownStatement)
+	;
+
+//The "bit" statement, which is a substatement to the "type" statement,MUST be present if the type is "bits".
+//All assigned names in a bits type MUST be unique.
+BitStatement:
+	'bit' name=STRINGARG
+	(';' 
+	|'{' (bitsubstatements+=BitSubstatement)* '}');
+BitSubstatement:
+	(DescriptionStatement
+	|ReferenceStatement
+	|StatusStatement
+	|PositionStatement
+	|UnknownStatement)
+	;
+	
+//The "enum" statement, which is a substatement to the "type" statement, MUST be present if the type is "enumeration".
+//The string MUST NOT be empty and MUST NOT have any leading or trailing whitespace characters.
+//All assigned names in an enumeration MUST be unique.
+//string
+EnumStatement:
+	'enum' name=(STRINGARG | KEY_IDENTIFIER)
+	(';' 
+	|'{' (enumsubstatements+=EnumSubstatement)* '}');
+EnumSubstatement:
+	(DescriptionStatement
+	|ReferenceStatement
+	|StatusStatement
+	|ValueStatement
+	|UnknownStatement)
+	;
+
+//identifier-arg-str
+ImportStatement:
+	'import' importURI=STRINGARG
+	(';' 
+	|'{' (importsubstatements+=ImportSubstatements)* '}');	
+ImportSubstatements:
+	(PrefixStatement
+	|RevisionDateStatement
+	|TypeStatement
+	|UnknownStatement)
+	;
+	
+//identifier-arg-str	
+IncludeStatement:
+	'include' importURI=STRINGARG
+	(';' 
+	|'{' (includesubstatements+=IncludeSubstatements)* '}');
+IncludeSubstatements:
+	(RevisionDateStatement
+	|TypeStatement
+	|UnknownStatement)
+	;
+
+//string
+WhenStatement:
+	'when' arg=STRINGARG
+	(';' 
+	|'{' (whensubstatements+=WhenSubstatements)* '}');	
+WhenSubstatements:
+	(DescriptionStatement
+	|ReferenceStatement
+	|UnknownStatement)
+	;
+
+	
+RevisionStatement:
+	'revision' date=STRINGARG
+	(';' 
+	|'{' (revisionsubstatements+=RevisionSubstatements)* '}');	
+RevisionSubstatements:
+	(DescriptionStatement
+	|ReferenceStatement
+	|UnknownStatement)
+	;	
+
+
+BuiltInType:
+	(btype = (
+	  'binary'
+	| 'bits'
+	| 'boolean'
+	| 'decimal64'
+	| 'empty' 
+    | 'enumeration'
+    | 'identityref'
+    | 'instance-identifier'
+    | 'int8'
+    | 'int16'
+    | 'int32'
+    | 'int64'
+    | 'leafref'
+    | 'string'
+    | 'uint8'
+    | 'uint16'
+    | 'uint32'
+    | 'uint64'
+    | 'union'))
+    ;
+	
+
+CUSTOMSTRING:
+	(STRING ('+' STRING)*);
+
+STRINGARG:
+	ID | CUSTOMSTRING | 'default';
+	
+STRINGARG2:
+	ID':'ID;
+
+STRINGARG3:
+	((ID + '|')*) + ID;
+
+STRINGARG4:
+	((ID+':'+ID)+(':'+ID)*|(':'+KEY_IDENTIFIER)*)	;	
+		
+KEY_IDENTIFIER:
+	=>'value' | =>'status' | =>'namespace' | =>'notification' |=> 'path' |=> 'description' |=> 'string' | =>'error-message' |
+	 =>'config' |=>'range' | =>'revision' | =>'type' | =>'boolean' | =>'prefix' | =>'range' | => 'key' | =>'fraction-digits';
+	 
+	
+terminal STRING: 
+	'"' -> '"' |
+	"'" -> "'" ;
+	
+terminal ID:
+	(('a'..'z'|'A'..'Z'|'_'|'-'|'.'|'/'|'0'..'9'|'\"')+);
+terminal ML_COMMENT:
+	 '/*' -> '*/';
+terminal SL_COMMENT:
+	 '//' !('\n'|'\r')* ('\r'? '\n')?;
+terminal WS:
+	 (' '|'\t'|'\r'|'\n')+;
+
+
+
+	
+	
+	
+
+	

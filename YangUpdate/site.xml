@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature url="features/YangFeature_1.0.0.201507131910.jar" id="YangFeature" version="1.0.0.201507131910"/>
+</site>
