@@ -1,3 +1,9 @@
+This licence applies to all files in this repository unless otherwise specifically
+stated inside of the file. 
+
+Copyright (c) 2013-2015 AT&T Intellectual Property
+---------------------------------------------------------------------------
+
 Eclipse Public License -v 1.0
 
 
